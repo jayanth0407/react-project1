@@ -3,24 +3,49 @@ export default function TextFrom (props){
     const handleclick = ()=>{
         let newtext=text.toUpperCase();
         settext(newtext)
-        
+        props.showAlert('Convert into Uppercase','success')
+    }
+    const handlelower= ()=>{
+        let low=text.toLocaleLowerCase();
+        settext(low)
+        props.showAlert('Convert into Lowercase','success')
     }
     const handleOnChange = (event)=>{
         console.log("On change");
         settext(event.target.value)
+
         
     }
-    const [text,settext]=useState("Enter Text Here fast")
+    const Clear =()=>{
+        let clear=''
+        settext(clear)
+        props.showAlert('Convert into clear','success')
+    }
+    const [text,settext]=useState("")
     return(
-        <div>
-<h1>{props.heading}</h1>
-<div className="mb-3"> 
-  <label htmlFor="mybox" className="form-label">Example textarea</label>
-  <textarea className="form-control" value={text} onChange={handleOnChange} id="mybox" rows="8"></textarea>
-</div>
-<button className="btn btn-primary" onClick={handleclick}>
-Change into Uppercase
-</button>
+    <>
+        <div className="container" style={{color: props.mode==="dark"?"white":"#232745"}}>
+            <h1>{props.heading}</h1>
+            <div className="mb-3"> 
+            <label htmlFor="mybox" className="form-label">Example textarea</label>
+            <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode==="dark"?"grey":"white" ,color: props.mode==="dark"?"white":"#232745"}} id="mybox" rows="8"></textarea>
+            </div>
+            <button className="btn btn-danger mx-2" onClick={handleclick}>
+            Change into Uppercase
+            </button>
+            <button className="btn btn-danger mx-2" onClick={handlelower}>
+            Change into LowerCase
+            </button>
+            <button className="btn btn-danger mx-2" onClick={Clear}> Clear Text</button>
+                    </div>
+            <div className="container2 my-3" style={{color: props.mode==="dark"?"white":"#232745"}}>
+                <h1>Your Summmer</h1>
+                <p>{text.split(" ").length - 1}word and {text.length} charaters </p>
+                <p>{0.08 * text.split(" ").length}Mintues To Read</p>
+                <h2>Preview</h2>
+                <p>{text.length>0?text:'Enter something else'}</p>
+
         </div>
+    </>
     ) 
 }
