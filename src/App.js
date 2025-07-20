@@ -10,14 +10,12 @@ import {
   Switch,
   Route,
   Link
-}from "react-router-dom"
-// import { useFormState } from 'react-dom';
-
+} from "react-router-dom";
 
 function App() {
   const[mode,setmode]=useState('light')
   
-  const[alert,setAlert]=useState(false)
+  const[alert,setAlert]=useState(null)
   
 
   const showAlert=(message,type)=>{
@@ -53,17 +51,15 @@ function App() {
 <Navbar titile="Texutils" Home="Home" about="About" mode={mode} toggleMode={toggleMode}/>
 <Aleart alert={alert}/>
 <div className='container my-3 ' >
-
-  <Switch>
-    <Route path='/About'>
-    <About/>
-    </Route>
-    <Route path='/'>
-    <TextFrom showAlert={showAlert} heading="Enter a Word" mode={mode} />
-    </Route>
-  </Switch>
-  
-  <About/>
+   <Switch>
+          <Route path="/about">
+            <About mode={mode}/>
+          </Route>
+          <Route path="/">
+            <TextFrom showAlert={showAlert} heading="Enter a Word" mode={mode} />
+          </Route>
+        </Switch>
+  {/* <About/> */}
 
 </div>
 </Router>
